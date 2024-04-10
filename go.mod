@@ -1,4 +1,4 @@
-module github.com/star-horizon/go-epay
+module github.com/akl7777777/go-epay
 
 go 1.20
 
