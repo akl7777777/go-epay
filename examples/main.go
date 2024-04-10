@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"net/url"
 
+	epay "github.com/akl7777777/go-epay"
 	"github.com/samber/lo"
-	epay "github.com/star-horizon/go-epay"
 )
 
 func main() {
