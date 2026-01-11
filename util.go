@@ -9,7 +9,7 @@ import (
 	"github.com/samber/lo"
 )
 
-// ParamsFilter 过滤参数，生成签名时需删除 “sign” 和 “sign_type” 参数
+// ParamsFilter 过滤参数，生成签名时需删除 "sign" 和 "sign_type" 参数
 func ParamsFilter(params map[string]string) map[string]string {
 	return lo.PickBy[string, string](params, func(key string, value string) bool {
 		return !(key == "sign" || key == "sign_type" || value == "")

@@ -2,6 +2,7 @@ package epay
 
 import (
 	"net/url"
+	"strings"
 
 	"github.com/mitchellh/mapstructure"
 )
@@ -55,10 +56,14 @@ func (c *Client) Purchase(args *PurchaseArgs) (string, map[string]string, error)
 		"sign":         "",
 	}
 
-	u, err := c.BaseUrl.Parse(PurchaseUrl)
-	if err != nil {
-		return "", nil, err
+	// 修复：正确拼接路径，避免路径被替换
+	u := *c.BaseUrl
+	// 确保 BaseUrl 的路径以 / 结尾
+	if u.Path != "" && u.Path[len(u.Path)-1] != '/' {
+		u.Path += "/"
 	}
+	// 移除 PurchaseUrl 开头的 /，然后拼接
+	u.Path += strings.TrimPrefix(PurchaseUrl, "/")
 
 	return u.String(), GenerateParams(requestParams, c.Config.Key), nil
 }
